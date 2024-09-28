@@ -1,0 +1,54 @@
+# version: '3'
+services:
+  frontend:
+    image: my-crud-app-frontend
+    # build: 
+    #   context: ./client
+    #   dockerfile: Dockerfile
+    ports:
+      - "8001:80" # Expose port 8080 on the host, mapped to nginx port 80
+    depends_on:
+      - backend
+    # network_mode: host
+
+  backend:
+    image: my-crud-app-backend
+    ports:
+      - "3001:3000" # Expose port 3000 for API access
+    environment:
+        PORT: 3000
+        MONGO_URI: mongodb://db:27017
+        DB_NAME: Node-API            
+    depends_on:
+      - db
+  #   # network_mode: host
+
+  db:
+    image: my-mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mohanasundaramg
+      - MONGO_INITDB_ROOT_PASSWORD=MBNFmHAHTGF9rN1l
+      - MONGO_INITDB_DATABASE=Node-API
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+  
+volumes:
+  mongo-data:
+
+
+
+
+    
+
+
+    
+
+
+ 
+
+  
+
+
