@@ -1,4 +1,4 @@
-export const root = "http://backend:3001"
+export const root = "http://localhost:3000"
 
 
 

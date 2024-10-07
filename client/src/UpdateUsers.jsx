@@ -5,7 +5,9 @@ import { Button, Form, Input } from "antd";
 import "./App.css";
 import {auth} from './firebase'
 import { useForm } from "antd/es/form/Form";
-import {root} from './Route'
+import {root} from './Route';
+import {updateUser} from "./slices/userReducer";
+import { useDispatch } from "react-redux";
 
 export const UpdateUsers = () => {
   const {id}=useParams()
@@ -14,17 +16,27 @@ export const UpdateUsers = () => {
   // const [email,setEmail]=useState("")
   // const [age,setAge]=useState("")
   const navigate=useNavigate()
-  
+  const dispatch=useDispatch()
   useEffect(()=>{
       const fetchUserData=(async()=>{
         try{
               const currentUser = auth.currentUser;
+              if(!currentUser){
+                console.log("no user is currently signed in");
+                return;
+              }
               const token = await currentUser.getIdToken();
               const response=await axios.get(`${root}/${id}`, {
                 headers: { Authorization:`Bearer ${token}` },
               });
               console.log(response.data)
-              form.setFieldsValue(response.data.user); 
+              const userData=response.data.user;
+              if(userData){
+                form.setFieldsValue(userData); 
+              }
+              else{
+                console.log("not available user data.")
+              }
         }
         catch(err){
           console.error(err)
@@ -53,6 +65,12 @@ export const UpdateUsers = () => {
           headers:{Authorization:`Bearer ${token}`}
         })
         console.log(response.data)
+        if(response.data.user){
+          dispatch(updateUser({id:response.data.user.id,...values}));
+        }
+        else{
+          console.log("user data not found in response data",response.data);
+        }
         navigate('/user')
       }
       catch(err){

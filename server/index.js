@@ -6,7 +6,7 @@
     const User=require('./models/CreateModel');
     const admin=require('firebase-admin');
     // const { auth } = require("../client/src/firebase");
-    const serviceAccount=require('./config/crud-85b26-firebase-adminsdk-m2f2j-bbb4b3bd72.json');
+    const serviceAccount=require('./config/crud-85b26-firebase-adminsdk-m2f2j-75a7b2748f.json');
     // const user = require("./models/CreateModel");
     // const corsAnywhere = require("cors-anywhere");
 
@@ -214,8 +214,8 @@
     // const MONGO_URI=process.env.MONGO_URI
     // console.log(MONGO_URI)
 
-     const mongoURI =
-       "mongodb://mohanasundaramg:MBNFmHAHTGF9rN1l@db:27017/Node-API?authSource=admin";
+     const mongoURI ="mongodb+srv://mohanasundaramg:MBNFmHAHTGF9rN1l@temp-pro-db.2pnmi.mongodb.net/Node-API?retryWrites=true&w=majority&appName=temp-pro-db"
+    //    "mongodb://mohanasundaramg:MBNFmHAHTGF9rN1l@db:27017/Node-API?authSource=admin";
    
     //  "mongodb://mohanasundaramg:MBNFmHAHTGF9rN1l@db:27017/Node-API?authSource=admin"
     //   "mongodb://mohanasundaramg:MBNFmHAHTGF9rN1l@db:27017/Node-API?authSource=admin"

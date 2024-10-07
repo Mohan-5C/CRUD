@@ -1,16 +1,24 @@
 import axios  from "axios";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { Button,Table} from "antd";
 import './App.css'
 import propTypes from 'prop-types';
 import {auth} from './firebase';
-import {root} from './Route'
+import {root} from './Route';
+import { addUser, deleteUser } from "./slices/userReducer";
+import {useDispatch} from 'react-redux';
+import { useSelector } from "react-redux";
 
 export const Users = ({user,setUser}) => {
-  const [users,setUsers]=useState([]);
+  // const [users,setUsers]=useState([]);
   const navigate=useNavigate();
-  
+  const dispatch=useDispatch();
+  const users=useSelector((state)=>state.users.users);
+  if(!Array.isArray(users)){
+    console.log("not an array");
+  }
+  console.log(users);
   useEffect(()=>{
      const fetchUserData=async()=>{
         try{
@@ -25,10 +33,14 @@ export const Users = ({user,setUser}) => {
                console.log(response.data)
               //  setUsers([response.data.users]);
                  if (Array.isArray(response.data.user)) {
-                   setUsers(response.data.user); // Use response.data.user if it's the array
-                 } else if (Array.isArray(response.data)) {
-                   setUsers(response.data); // Use response.data if it's the array directly
-                 } else {
+                  //  setUsers(response.data.user); // Use response.data.user if it's the array
+                   response.data.user.forEach((user)=>dispatch(addUser(user)));
+                 } 
+                 else if (Array.isArray(response.data)) {
+                  //  setUsers(response.data); // Use response.data if it's the array directly
+                    response.data.forEach((user)=>dispatch(addUser(user)));
+                 } 
+                 else {
                    console.error("Unexpected data format:", response.data);
                  }
            }
@@ -41,7 +53,7 @@ export const Users = ({user,setUser}) => {
         // }
         catch (err) {
          console.log(err.response ? err.response.data : err.message);
-}
+        }
      }
 
 
@@ -61,7 +73,7 @@ export const Users = ({user,setUser}) => {
      }
     
 
-  },[setUser,user,navigate])
+  },[user,setUser,navigate,dispatch])
 
 
   const handleDelete=async(id)=>{
@@ -71,7 +83,8 @@ export const Users = ({user,setUser}) => {
            console.log("to token"+token)
            const response= await axios.delete(`${root}/deleteUser/${id}`,{headers:{Authorization:`Bearer ${token}`}})
            console.log(response.data)
-           setUsers((users).filter((user)=> user._id!==id))
+          //  setUsers((users).filter((user)=> user._id!==id))
+          dispatch(deleteUser(id));
         }
         catch(err){
           console.error(err)
@@ -188,7 +201,7 @@ export const Users = ({user,setUser}) => {
           ))}
         </tbody>
       </table> */}
-        <Table className="table" columns={columns} dataSource={users}  rowKey="_id"/>
+        <Table className="table" columns={columns} dataSource={users}  rowKey="_id" />
         <button className="logout-btn" onClick={handleLogout}>logout</button>
       </div>
     </div>
