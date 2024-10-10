@@ -1,40 +1,42 @@
 // import {useState} from 'react';
-import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
-import './App.css';
-import {root} from './Route'
-
+import "../App.css";
+import { root } from "../Utils/Route";
+import { useDispatch } from "react-redux";
+import createAction from "../Redux/Actions/createAction";
 
 export const CreateUsers = () => {
   // const[name,setName]=useState("")
   // const[email,setEmail]=useState("")
   // const[age,setAge]=useState("")
-  const navigate=useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSumbit=async(values)=>{
-    const token = localStorage.getItem("authToken");
-    console.log("your token is"+token)
-    if (!token) {
-      console.log("no token");
-    }
-    try{
-       console.log(values)
-       
-      //  const response= await axios.post("http://backend:3000/createUser",values,{
-      //   headers:{Authorization: token}
-      //  });
-       const response = await axios.post(`${root}/createUser`, values, {
-         headers: { Authorization: `Bearer ${token}` },
-       });
-       console.log(response.data)
-       navigate('/user')
-    }
-    catch(err){
-      // console.log("error",err.response ? err.response.data : err.message)
-      console.error("Error:", err.response ? err.response.data : err.message);
-    }
-    
+  const handleSumbit = async (values) => {
+    // const token = localStorage.getItem("authToken");
+    // console.log("your token is"+token)
+    // if (!token) {
+    //   console.log("no token");
+    // }
+    // try{
+    //    console.log(values)
+
+    //   //  const response= await axios.post("http://backend:3000/createUser",values,{
+    //   //   headers:{Authorization: token}
+    //   //  });
+    //    const response = await axios.post(`${root}/createUser`, values, {
+    //      headers: { Authorization: `Bearer ${token}` },
+    //    });
+    //    console.log(response.data)
+    //    navigate('/user')
+    // }
+    // catch(err){
+    //   // console.log("error",err.response ? err.response.data : err.message)
+    //   console.error("Error:", err.response ? err.response.data : err.message);
+    // }
+    dispatch(createAction(values, navigate));
     // try {
     //   const response = await axios.post(
     //     "http://localhost:3000/createUser",
@@ -58,7 +60,7 @@ export const CreateUsers = () => {
     // .catch((err)=>{
     //   console.log(err)
     // })
-  }
+  };
 
   return (
     // <div>
@@ -86,21 +88,36 @@ export const CreateUsers = () => {
       <Form className="form" onFinish={handleSumbit}>
         <h1>ADD DETAILS</h1>
         <div className="div">
-          <Form.Item label="Name" className="Input" name="name" rules={[{required:true}]}>
+          <Form.Item
+            label="Name"
+            className="Input"
+            name="name"
+            rules={[{ required: true }]}
+          >
             <Input
               placeholder="input placeholder"
               type="text"
               // onChange={(e) => setName(e.target.value)}
             />
           </Form.Item>
-          <Form.Item className="Input" label="Email" name="email" rules={[{required:true}]}>
+          <Form.Item
+            className="Input"
+            label="Email"
+            name="email"
+            rules={[{ required: true }]}
+          >
             <Input
               placeholder="input placeholder"
               type="text"
               // onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Item>
-          <Form.Item className="Input" label="Age" name="age" rules={[{required:true}]}>
+          <Form.Item
+            className="Input"
+            label="Age"
+            name="age"
+            rules={[{ required: true }]}
+          >
             <Input
               placeholder="input placeholder"
               type="Number"
@@ -109,11 +126,11 @@ export const CreateUsers = () => {
           </Form.Item>
         </div>
         <Form.Item>
-          <Button type="primary" htmlType="submit">Submit</Button>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     </div>
   );
-}
-
-
+};

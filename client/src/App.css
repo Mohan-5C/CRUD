@@ -1,103 +1,100 @@
-.crud{
-    background-color: bisque;
-    background-color: black;
+.crud {
+  background-color: bisque;
+  background-color: black;
 }
 
-
-
-.myForm{
- background-color: bisque;
- max-width: 500px;
- border-radius: 10%;
- margin: auto;
+.myForm {
+  background-color: bisque;
+  max-width: 500px;
+  border-radius: 10%;
+  margin: auto;
 }
 
-.form{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    margin: auto;
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
 }
 
-
-
-.div{
-   display:flex;
-   flex-direction: column;
-   margin: auto;
+.div {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
-.Input{
-    max-width:200px;
+.Input {
+  max-width: 200px;
 }
 
-.add-btn{
-    background-color: green;
-    border-radius: 5%;
-    max-width: 50px;
+.add-btn {
+  background-color: green;
+  border-radius: 5%;
+  max-width: 50px;
 }
 
-.update-btn{
-   background-color:yellow;
-    border-radius: 5%;
-    max-width: 50px;   
+.update-btn {
+  background-color: yellow;
+  border-radius: 5%;
+  max-width: 50px;
 }
 
-.delete-btn{
-   background-color:red;
-    border-radius: 5%;
-    max-width: 50px;
+.delete-btn {
+  background-color: red;
+  border-radius: 5%;
+  max-width: 50px;
 }
 
-.h1{
-    color: blue;
+.h1 {
+  color: blue;
 }
 
-.login{
-    background-color: green;
-    max-width: 50px;
-    text-align: center;
-    margin: auto;
+.login {
+  background-color: green;
+  max-width: 50px;
+  text-align: center;
+  margin: auto;
 }
 
-.register{
-    background-color: blueviolet;
-    max-width: 50px;
-    text-align: center;
-    margin: auto;
+.register {
+  background-color: blueviolet;
+  max-width: 50px;
+  text-align: center;
+  margin: auto;
 }
 
-.buttons{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-    
+.buttons {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
 }
 
-.login-body,.register-body{
-    background-color: rgb(246, 237, 136);
-    max-width: 550px;
-    border-radius: 20px;
-    margin: auto;
+.login-body,
+.register-body {
+  background-color: rgb(246, 237, 136);
+  max-width: 550px;
+  border-radius: 20px;
+  margin: auto;
 }
 
-.login-form,.register-form{
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    margin: auto; 
-    text-align: center;
+.login-form,
+.register-form {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
 }
 
-.logout-btn{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin:auto;
-    background-color: red;
-    border-radius: 20px;
-    size-adjust: 500px;
-    cursor: pointer;
+.logout-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  background-color: red;
+  border-radius: 20px;
+  size-adjust: 500px;
+  cursor: pointer;
 }

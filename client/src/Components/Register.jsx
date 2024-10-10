@@ -1,28 +1,25 @@
 // import {useState} from "react"
-import {auth} from '../firebase'
-import { useNavigate } from "react-router-dom"
+import { auth } from "../Utils/firebase";
+import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 
-
-
 export const Register = () => {
-//   const [email,setEmail]=useState('')
-//   const [password,setPassword]=useState('')
-  const navigate=useNavigate()
+  //   const [email,setEmail]=useState('')
+  //   const [password,setPassword]=useState('')
+  const navigate = useNavigate();
 
-  const handleSubmit=async(values)=>{
+  const handleSubmit = async (values) => {
     // e.preventDefault();
-    const {email,password}=values;
-    try{
-       await auth.createUserWithEmailAndPassword(email,password)
-       alert("Email Id registered successfully...! please login");
-       navigate('/login')
+    const { email, password } = values;
+    try {
+      await auth.createUserWithEmailAndPassword(email, password);
+      alert("Email Id registered successfully...! please login");
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+      alert(err);
     }
-    catch(err){
-        console.log(err)
-        alert(err)
-    }
-  }
+  };
 
   return (
     <div className="register-body">
@@ -102,4 +99,4 @@ export const Register = () => {
       </Form>
     </div>
   );
-}
+};

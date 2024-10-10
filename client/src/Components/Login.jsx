@@ -1,47 +1,45 @@
 // import { useState } from "react";
-import {auth} from '../firebase';
+import { auth } from "../Utils/firebase";
 import { useNavigate } from "react-router-dom";
-import propTypes from 'prop-types';
+import propTypes from "prop-types";
 import { Button, Checkbox, Form, Input } from "antd";
 
-
-
-
-export const Login = ({setUser}) => {
+export const Login = ({ setUser }) => {
   // const [email,setEmail]=useState('')
   // const [password, setPassword] = useState("");
-  const navigate=useNavigate()
-  
-  const handleSubmit=async(values)=>{
+  const navigate = useNavigate();
+
+  const handleSubmit = async (values) => {
     //  e.preventDefault();
-     const {email,password}=values
-    try{
-       const userCredential=await auth.signInWithEmailAndPassword(email,password);
-       const user=userCredential.user;
-       if(!user.displayName){
-         await user.updateProfile({
-              displayName:email.split('@')[0],
-         });
-         user.displayName = email.split("@")[0];
-       }
-       
-       
-       const displayName =user.displayName || user.email;
-      
-       setUser(displayName);
-       console.log(displayName)
-       localStorage.setItem('displayName',displayName);
+    const { email, password } = values;
+    try {
+      const userCredential = await auth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      const user = userCredential.user;
+      if (!user.displayName) {
+        await user.updateProfile({
+          displayName: email.split("@")[0],
+        });
+        user.displayName = email.split("@")[0];
+      }
+
+      const displayName = user.displayName || user.email;
+
+      setUser(displayName);
+      console.log(displayName);
+      localStorage.setItem("displayName", displayName);
       //  const token=btoa(email);
-      const token=await userCredential.user.getIdToken();
-       localStorage.setItem('authToken',token);
-       navigate("/user");
-       console.log(email+" "+password)
-    } 
-    catch(err){
-       console.log(err);
-       alert(err)
+      const token = await userCredential.user.getIdToken();
+      localStorage.setItem("authToken", token);
+      navigate("/user");
+      console.log(email + " " + password);
+    } catch (err) {
+      console.log(err);
+      alert(err);
     }
-  }
+  };
 
   return (
     // <div>
@@ -124,11 +122,8 @@ export const Login = ({setUser}) => {
       </Form>
     </div>
   );
-}
-
-Login.propTypes={
-   setUser:propTypes.func.isRequired
 };
 
-
-
+Login.propTypes = {
+  setUser: propTypes.func.isRequired,
+};

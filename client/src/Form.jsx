@@ -1,28 +1,28 @@
 // import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 // import { useState } from "react";
-import { auth } from "./firebase";
+import { auth } from "./Utils/firebase";
 import { useNavigate } from "react-router-dom";
 import propTypes from "prop-types";
 
-export const FormComponent= ({setUser}) => {
+export const FormComponent = ({ setUser }) => {
   // const [email,setEmail]=useState("")
   // const [password, setPassword] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
-  // e.preventDefault();
-  const {email,password}=values
-  try {
-    await auth.signInWithEmailAndPassword(email, password);
-    setUser(email);
-    navigate("/user");
-    console.log(email + " " + password);
-  } catch (err) {
-    console.log(err);
-    alert(err);
-  }
-};
+    // e.preventDefault();
+    const { email, password } = values;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setUser(email);
+      navigate("/user");
+      console.log(email + " " + password);
+    } catch (err) {
+      console.log(err);
+      alert(err);
+    }
+  };
   return (
     <Form
       name="basic"
@@ -91,7 +91,7 @@ export const FormComponent= ({setUser}) => {
     </Form>
   );
 };
-export {FormComponent as Form};
+export { FormComponent as Form };
 
 FormComponent.propTypes = {
   setUser: propTypes.func.isRequired,
